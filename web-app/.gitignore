@@ -1,0 +1,9 @@
+/bin/
+/.mvn/
+/.settings/
+/logs/
+/.gradle/
+/build/
+/.DS_Store
+/out/
+/.idea/
