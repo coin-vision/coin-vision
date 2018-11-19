@@ -1,0 +1,44 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'net.coinshome'
+version = '0.0.2-SNAPSHOT'
+sourceCompatibility = 1.8
+
+jar {
+	baseName = 'gs-spring-boot'
+	version =  '0.1.0'
+}
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-freemarker')
+	compile('org.springframework.boot:spring-boot-starter-quartz')
+	compile('org.springframework.boot:spring-boot-devtools')
+	compile('joda-time:joda-time')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+  
+	
+	compile("org.tensorflow:tensorflow:1.8.0")
+	compile("commons-io:commons-io:2.6")
+	compile 'org.im4java:im4java:1.4.0'
+}
