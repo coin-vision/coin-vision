@@ -1,0 +1,1 @@
+# Coin Vision dataset extractor
