@@ -29,9 +29,9 @@ public class CatalogConfigLoader {
     private Map<String, String> label2CoinIdMap = null;
 
     public CatalogConfigLoader(AppConfig appConfig) {
-        dnnGraphFileStr = appConfig.getDnnRootDir() + "/all-coins/" + DNN_GRAPH_FILE;
-        dnnLabelsFileStr = appConfig.getDnnRootDir() + "/all-coins/" + DNN_LABELS_FILE;
-        allCsvInputFileStr = appConfig.getDnnRootDir() + "/all-coins/" + ALL_CSV_INPUT_FILE;
+        dnnGraphFileStr = appConfig.getDnnRootDir() + "/" + DNN_GRAPH_FILE;
+        dnnLabelsFileStr = appConfig.getDnnRootDir() + "/" + DNN_LABELS_FILE;
+        allCsvInputFileStr = appConfig.getDnnRootDir() + "/" + ALL_CSV_INPUT_FILE;
     }
 
     public Map<String, String> loadLabel2CoinIdMap() {
@@ -44,11 +44,10 @@ public class CatalogConfigLoader {
                 String str = null;
                 while ((str = bufferedReader.readLine()) != null) {
                     String[] lineArr = str.split(CSV_SPLITER);
-                    String coinLabel = lineArr[1];
                     String imageId = lineArr[2];
-                    String coinIdcoinGroupId = lineArr[4];
+                    String coinGroupId = lineArr[4];
 
-                    label2CoinIdMap.put(coinLabel, coinIdcoinGroupId + CSV_SPLITER + imageId);
+                    label2CoinIdMap.put(coinGroupId, imageId);
                 }
             } catch (Exception e) {
                 logger.error("Error loading loadLabel2CoinIdMap", e);

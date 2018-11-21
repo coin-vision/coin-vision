@@ -104,14 +104,11 @@ public class CoinRecognitionService {
             for (int j = 0; j < labelProbabilities.length; j++) {
                 for (int i = 0; i < tempMatchAmount; i++) {
                     int bestLabelIdx = maxIndex(labelProbabilities[j]);
-                    String label = labelIdx2NameMap.get(bestLabelIdx);
-                    String coinIdimageId = label2CoinIdMap.get(label);
+                    String coinId = labelIdx2NameMap.get(bestLabelIdx);
+                    String imageId = label2CoinIdMap.get(coinId);
 
-                    logger.debug("BEST MATCH: {} ({} likely) coinshome.net coinGroupId: {}", label, labelProbabilities[j][bestLabelIdx] * 100f, coinIdimageId);
+                    logger.debug("BEST MATCH: {} ({} likely) coinshome.net coinGroupId: {}", coinId, labelProbabilities[j][bestLabelIdx] * 100f, coinId);
 
-                    String[] lineArr = coinIdimageId.split(CatalogConfigLoader.CSV_SPLITER);
-                    String coinId = lineArr[0];
-                    String imageId = lineArr[1]; // don't get it randomly from dataset - use images from coinManager.getCoinBaseById(coinId, Locales.EN).getImageId()
                     coinIds[i] = coinId;
 
                     PredictionInfo predictionInfo = new PredictionInfo(coinId, imageId, labelProbabilities[j][bestLabelIdx]);
