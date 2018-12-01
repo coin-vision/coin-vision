@@ -217,9 +217,10 @@ export default class CoinSearchScreen extends Component<{}, {}> {
           </View>
 
           { this._showSearchResult() }
-          { this._maybeRenderUploadingOverlay() }
+
 
         </ScrollView>
+        { this._maybeRenderUploadingOverlay() }
       </View>
     );
   }
@@ -231,6 +232,11 @@ export default class CoinSearchScreen extends Component<{}, {}> {
     navigation.navigate('CoinCamera', {store: store});
   };
 
+  _cancelSearch = async() => {
+    const {store} = this.context;
+    store.dispatch({type: 'CANCEL_SEARCH'});
+  };
+
   _maybeRenderUploadingOverlay = () => {
     const {store} = this.context;
     const state = store.getState();
@@ -238,15 +244,34 @@ export default class CoinSearchScreen extends Component<{}, {}> {
     if ("processing" == state.searchResult.predictionStatus) {
       return (
         <View
-          style={[StyleSheet.absoluteFill, {backgroundColor: 'rgba(0,0,0,0.4)', alignItems: 'center', justifyContent: 'center'}]}>
+          style={[StyleSheet.absoluteFill,
+            {backgroundColor: 'rgba(0,0,0,0.8)', alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'column'}]}>
           <ActivityIndicator
+            style={{flex: 3}}
             color="#fff"
             animating
             size="large"
           />
+          <View
+            style={{flex: 1}}
+          >
+            <TouchableOpacity
+              style={globalStyles.roundButton}
+              onPress={this._cancelSearch}
+            >
+              <Ionicons
+                name={'ios-close'}
+                size={50}
+                style={{ color: '#3478f6' }}
+              />
+              <Text style={globalStyles.roundButtonText}>
+                {i18n.t('Cancel')}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       );
-    }
+     }
   };
 
   _showSearchResult = () => {

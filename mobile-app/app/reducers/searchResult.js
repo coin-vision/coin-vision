@@ -12,6 +12,9 @@ const searchResult = (state = {
     case 'START_SEARCH':
       return {...state, predictionStatus: "processing"};
 
+    case 'CANCEL_SEARCH':
+      return {...state, predictionStatus: null};
+
     case 'SET_CIID':
       return {...state, ciid: action.ciid, predictionStatus: "processing"};
 
