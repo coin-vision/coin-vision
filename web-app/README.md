@@ -12,4 +12,4 @@ java -jar build/libs/web-app-0.0.2-SNAPSHOT.jar
 
 ```
     
-Point browser to http://localhost:8888/ and coin picture
+Point browser to http://localhost:8888/ and upload coin picture
