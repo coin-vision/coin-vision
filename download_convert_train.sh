@@ -1,20 +1,22 @@
 #!/bin/sh
 
+### Configs
 
 DATA_DIR=./coins-5-classes
-
 DATASET_URL=https://s3.amazonaws.com/coin-vision/coins-5-classes.csv
+
 
 DATASET_DIR=${DATA_DIR}
 TRAIN_DIR=${DATASET_DIR}/train_logs
 
 
+
+# DOWNLOADING IMAGES
+
 dataset-extractor/gradlew -b dataset-extractor/build.gradle clean shadowJar && java -jar dataset-extractor/build/libs/dataset-extractor-all.jar ${DATASET_URL} ${DATA_DIR}
 
-source ~/tensorflow/bin/activate
 
-
-# converting image to *.tfrecord format
+# CONVERTING IMAGES TO *.tfrecord format
 
 # before the next steps you can set training set amount and number of shards -> check/fix convert_coins.py
 
@@ -24,11 +26,10 @@ python dnn-trainer-tf/download_and_convert_data.py \
 
 
 
-# training model
+# TRAINING MODEL
 
 # starting TensorBoard to monitor training
-
-tensorboard --logdir=${TRAIN_DIR} &
+# tensorboard --logdir=${TRAIN_DIR} &
 
 # if run on CPU add --clone_on_cpu=True
 
