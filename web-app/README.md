@@ -1,11 +1,15 @@
 # Coin Vision API service
 
-Steps:
+Steps to run: download trained model, unzip, build app, run app
+```
+curl https://s3.amazonaws.com/coin-vision/trained-model-usa-coins-398-classes.zip >> temp.zip
 
-download trained model from https://s3.amazonaws.com/coin-vision/usa-coins-398.zip
+unzip temp.zip 
 
-edit src/main/resources/app_config-spa.properties
+./gradlew clean build
 
-update path to the trained model
+java -jar build/libs/web-app-0.0.2-SNAPSHOT.jar
 
- ./gradlew clean bootRun
+```
+    
+Point browser to http://localhost:8888/ and coin picture
