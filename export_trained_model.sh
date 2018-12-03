@@ -1,7 +1,8 @@
 #!/bin/sh
 
-DATA_DIR=./coins-5-classes
-DATASET_DIR=${DATA_DIR}
+#DATASET_DIR=./coins-5-classes
+DATASET_DIR=./usa-coins-398
+
 TRAIN_DIR=${DATASET_DIR}/train_logs
 
 CHECKPOINT_FILE=${TRAIN_DIR}/model.ckpt-0
