@@ -31,9 +31,11 @@ slim = tf.contrib.slim
 
 _FILE_PATTERN = 'coins_%s_*.tfrecord'
 
-SPLITS_TO_SIZES = {'train': 8142, 'validation': 11910}
+SPLITS_TO_SIZES = {'train': 248193, 'validation': 49515}
+#SPLITS_TO_SIZES = {'train': 8142, 'validation': 11910}
 
-_NUM_CLASSES = 5
+_NUM_CLASSES = 398
+#_NUM_CLASSES = 5
 
 _ITEMS_TO_DESCRIPTIONS = {
     'image': 'A color image of a coin.',
