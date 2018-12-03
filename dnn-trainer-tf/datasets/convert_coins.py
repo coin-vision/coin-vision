@@ -46,7 +46,7 @@ _DATA_URL = 'http://download.tensorflow.org/example_images/flower_photos.tgz'
 _RANDOM_SEED = 0
 
 # The number of shards per dataset split.
-_NUM_SHARDS = 100
+_NUM_SHARDS = 1000
 
 
 class ImageReader(object):

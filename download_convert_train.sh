@@ -2,18 +2,19 @@
 
 ### Configs
 
-DATA_DIR=./coins-5-classes
-DATASET_URL=https://s3.amazonaws.com/coin-vision/coins-5-classes.csv
+#DATA_DIR=./coins-5-classes
+#DATASET_URL=https://s3.amazonaws.com/coin-vision/coins-5-classes.csv
 
+DATASET_DIR=./usa-coins-398
+DATASET_URL=https://s3.amazonaws.com/coin-vision/usa-coins-398-classes.csv
 
-DATASET_DIR=${DATA_DIR}
 TRAIN_DIR=${DATASET_DIR}/train_logs
 
 
 
 # DOWNLOADING IMAGES
 
-dataset-extractor/gradlew -b dataset-extractor/build.gradle clean shadowJar && java -jar dataset-extractor/build/libs/dataset-extractor-all.jar ${DATASET_URL} ${DATA_DIR}
+dataset-extractor/gradlew -b dataset-extractor/build.gradle clean shadowJar && java -jar dataset-extractor/build/libs/dataset-extractor-all.jar ${DATASET_URL} ${DATASET_DIR}
 
 
 # CONVERTING IMAGES TO *.tfrecord format
@@ -22,7 +23,7 @@ dataset-extractor/gradlew -b dataset-extractor/build.gradle clean shadowJar && j
 
 python dnn-trainer-tf/download_and_convert_data.py \
     --dataset_name=coins \
-    --dataset_dir="${DATA_DIR}" 
+    --dataset_dir="${DATASET_DIR}" 
 
 
 
