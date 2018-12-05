@@ -16,8 +16,6 @@ export const AppNavigator = createStackNavigator({
     CoinCamera: {screen: CoinCameraScreen}
   },
   {
-    // swipeEnabled: false,
-    // lazyLoad: true,
     animationEnabled: true,
   }
 );

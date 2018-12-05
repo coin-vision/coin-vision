@@ -1,4 +1,4 @@
-import {AsyncStorage, Alert, NativeModules, Platform} from "react-native";
+import { Alert } from "react-native";
 import i18n from "./i18n";
 import * as Config from "./Config";
 
@@ -8,8 +8,6 @@ export async function uploadImageAsync(store: any, uri1: String, uri2: String) {
   const state = store.getState();
 
   store.dispatch({type: 'START_SEARCH'});
-
-  let activeCatalogs = '';
 
   let uriParts1 = uri1.split('.');
   let fileType1 = uriParts1[uriParts1.length - 1]; // 'image/jpeg';
@@ -74,7 +72,7 @@ export async function uploadImageAsync(store: any, uri1: String, uri2: String) {
       Alert.alert('Server connection error');
     });
 
-};
+}
 
 export async function handleImagePicked(store, imageURI, imageSource) {
 
@@ -92,13 +90,13 @@ export async function handleImagePicked(store, imageURI, imageSource) {
     console.log({e});
     alert('Upload failed, sorry :(');
   }
-};
+}
 
 
 export async function search(store: Object) {
   const state = store.getState();
   uploadImageAsync(store, state.searchInput.image1, state.searchInput.image2);
-};
+}
 
 export function geUserLanguage() {
   let language = i18n.currentLocale();
@@ -113,6 +111,6 @@ export function geUserLanguage() {
 
 export function geCoinsHomeLanguage() {
   let language = geUserLanguage();
-  language = ('pt' == language) ? 'es' : language; // for pt show es at coinshome.net links
+  language = ('pt' === language) ? 'es' : language; // for pt show es at coinshome.net links
   return language;
 }
