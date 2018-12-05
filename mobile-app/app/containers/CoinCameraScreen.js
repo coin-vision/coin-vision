@@ -1,16 +1,11 @@
 import React, {Component} from "react";
 import {
-  Alert,
-  Dimensions,
   Image,
-  ListView,
-  ScrollView,
   View,
   StyleSheet,
   Text,
   TouchableOpacity,
-  Button,
-  Platform
+  Button
 } from "react-native";
 import PropTypes from "prop-types";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -26,7 +21,7 @@ export default class CoinCameraScreen extends Component {
   static navigationOptions = ({navigation}) => ( {
       title: i18n.t('Make-a-picture'),
       headerLeft: (
-        <Text></Text>
+        <Text/>
       ),
       headerRight: (
         <View style={{padding: 5}}>
@@ -104,7 +99,7 @@ export default class CoinCameraScreen extends Component {
         </RNCamera>
         <View style={(state.searchInput.showTargetMask) ? styles.roundTarget: {}}>
           {
-            (state.searchInput.showTargetMask) ? ( <Text style={styles.targetCross}> + </Text> ) : (<View></View>)
+            (state.searchInput.showTargetMask) ? ( <Text style={styles.targetCross}> + </Text> ) : (<View/>)
           }
         </View>
 
@@ -143,7 +138,7 @@ export default class CoinCameraScreen extends Component {
 
                 handleImagePicked(store, response.uri, Config.IMAGE_SOURCE_PHOTO); // handle / upload resized image
 
-              }).catch((err) => {
+              }).catch(() => {
               // Oops, something went wrong. Handle/upload original size
               handleImagePicked(store, data.uri, Config.IMAGE_SOURCE_PHOTO);
             });

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import {createStackNavigator} from "react-navigation";
 import { createReactNavigationReduxMiddleware, reduxifyNavigator } from 'react-navigation-redux-helpers';
 
-import CoinSearchScreen from './screens/CoinSearchScreen';
-import CoinCameraScreen from './screens/CoinCameraScreen';
+import CoinSearchScreen from './containers/CoinSearchScreen';
+import CoinCameraScreen from './containers/CoinCameraScreen';
 
 export const ReactNavigationReduxMiddleware = createReactNavigationReduxMiddleware(
   "root",

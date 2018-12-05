@@ -3,7 +3,6 @@ import {
   ActivityIndicator,
   Image,
   Linking,
-  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -28,16 +27,12 @@ let options = {
 
 export default class CoinSearchScreen extends Component<{}, {}> {
 
-  static navigationOptions = ({navigation}) => {
-
-    const {params} = navigation.state;
+  static navigationOptions = () => {
 
     let titleStr = 'Coin Vision';
 
-    let headerLeftComponent = <View></View>;
-
-
-    let headerRightComponent = <View></View>;
+    let headerLeftComponent = <View/>;
+    let headerRightComponent = <View/>;
 
     return ( {
         header: (
@@ -81,7 +76,7 @@ export default class CoinSearchScreen extends Component<{}, {}> {
     const state = store.getState();
 
     let showCameraRoll, showPhoto, showSearch, showReset, showSubtitle = false;
-    if ("done" != store.getState().searchResult.predictionStatus) {
+    if ("done" !== store.getState().searchResult.predictionStatus) {
       showCameraRoll = (null == state.searchInput.image1 || null == state.searchInput.image2);
       showPhoto = (null == state.searchInput.image1 || null == state.searchInput.image2);
       showSearch = (null != state.searchInput.image1 || null != state.searchInput.image2);
@@ -115,7 +110,7 @@ export default class CoinSearchScreen extends Component<{}, {}> {
             {
               (state.searchInput.image1)
                 ? <Image style={[styles.uploadingImage,
-                                        ('LANDSCAPE' == state.searchInput.imageRotation)
+                                        ('LANDSCAPE' === state.searchInput.imageRotation)
                                             ? {resizeMode: 'contain', transform: [{ rotate: '90deg'}]}
                                             : {resizeMode: 'contain'}
                                         ]} source={{ uri: state.searchInput.image1 }}/>
@@ -124,7 +119,7 @@ export default class CoinSearchScreen extends Component<{}, {}> {
             {
               (state.searchInput.image2)
                 ? <Image style={[styles.uploadingImage,
-                                        ('LANDSCAPE' == state.searchInput.imageRotation)
+                                        ('LANDSCAPE' === state.searchInput.imageRotation)
                                             ? {resizeMode: 'contain', transform: [{ rotate: '90deg'}]}
                                             : {resizeMode: 'contain'}
                                     ]} source={{ uri: state.searchInput.image2 }}/>
@@ -135,7 +130,7 @@ export default class CoinSearchScreen extends Component<{}, {}> {
           {
             (null != searchInStr) ? <Text
                 style={{ flex: 1, color: Config.DARK_GRAY_COLOR, fontSize: 13, fontWeight: 'bold'}}> {i18n.t('Search-in')}: {searchInStr} </Text> :
-              <Text></Text>
+              <Text/>
           }
 
           <View style={styles.controlPanelContainer}>
@@ -241,7 +236,7 @@ export default class CoinSearchScreen extends Component<{}, {}> {
     const {store} = this.context;
     const state = store.getState();
 
-    if ("processing" == state.searchResult.predictionStatus) {
+    if ("processing" === state.searchResult.predictionStatus) {
       return (
         <View
           style={[StyleSheet.absoluteFill,
@@ -280,11 +275,9 @@ export default class CoinSearchScreen extends Component<{}, {}> {
     const state = store.getState();
     let searchResult = state.searchResult;
 
-    if ("done" != searchResult.predictionStatus) {
+    if ("done" !== searchResult.predictionStatus) {
       return;
     }
-    // temp
-    // searchResult = { "coinGroups" : [{ "coinId":"e1bBwcI0sZIAAAEnE3mDzA.e",  "title":" todo ",  "imageId":"S1TBwcI0HG0AAAEoXnYYEDnT" } ,{ "coinId":"1sUKbzbiyakAAAFNzTxDXQCs",  "title":" todo ",  "imageId":"BqwKbzbiJ00AAAFMxtqt_LaK" } ,{ "coinId":"7XB_AAEByKcAAAEjNEDAPfNR",  "title":" todo ",  "imageId":"MXh_AAEBZw4AAAEjsT_APfNR" } ,{ "coinId":"SiB_AAEBOWIAAAEjnRtucew4",  "title":" todo ",  "imageId":"kHUKbzbijGAAAAFLX89KKMP4" } ,{ "coinId":"akDBwcI0Mw4AAAEohmR8PE3x",  "title":" todo ",  "imageId":"Hy3BwcI01RMAAAEoamR8PE3x" } ,{ "coinId":"gzEKbzbiUJ4AAAFNFeJXxkF3",  "title":" todo ",  "imageId":"1eoKbzbiLEUAAAFL4TH6AggS" } ,{ "coinId":"RtrBwcI0UvMAAAEpAs.1kA3X",  "title":" todo ",  "imageId":"jSbBwcI0AdEAAAEpEs61kA3X" } ,{ "coinId":"R2jBwcI0uS4AAAEr0dVbGgEs",  "title":" todo ",  "imageId":"VwkKbzbiY78AAAFLZKb6AggT" } ,{ "coinId":"NUnBwcI0iyQAAAEpqgUFQRyy",  "title":" todo ",  "imageId":"nKYKbzbik6MAAAFLmcKgLg6W" } ] };
 
     let language = geCoinsHomeLanguage();
 
