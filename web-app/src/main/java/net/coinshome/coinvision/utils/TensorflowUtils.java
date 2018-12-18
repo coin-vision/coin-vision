@@ -14,22 +14,11 @@ public class TensorflowUtils {
             // long start = System.currentTimeMillis();
             try (Graph g = new Graph()) {
                 GraphBuilder b = new GraphBuilder(g);
-                // - The model was trained with images scaled to 224x224 pixels.
-                // - The colors, represented as R, G, B in 1-byte each were converted to
-                // float using (value - Mean)/Scale.
-                //final int H = 299;
-                // final int W = 299;
-                // final float mean = 117f;
-                // final float scale = 1f;
                 final float mean = 0f;
                 final float scale = 255f;
 
-                // Since the graph is being constructed once per execution here, we can use a
-                // constant for the
-                // input image. If the graph were to be re-used for multiple input images, a
-                // placeholder would
-                // have been more appropriate.
-
+                // Since the graph is being constructed once per execution here, we can use a constant for the input image.
+                // If the graph were to be re-used for multiple input images, a placeholder would have been more appropriate.
                 final Output<String> input = b.constant("input", imageBytes[i]);
                 final Output<Float> output = b.div(
                         b.sub(
@@ -42,7 +31,7 @@ public class TensorflowUtils {
                                                         Float.class),
                                                 b.constant("make_batch", 0)
                                         ),
-                                        b.constant("size", new int[]{ImageUtils.partHeight, ImageUtils.partWidth}))
+                                        b.constant("size", new int[]{ImageUtils.INCEPTION_HEIGHT, ImageUtils.INCEPTION_WIDTH}))
                                 , b.constant("mean", mean)
                         ),
                         b.constant("scale", scale)
@@ -63,45 +52,6 @@ public class TensorflowUtils {
         return Tensor.create(bResult, Float.class);
     }
 
-//    public static Tensor<Float> preprocessImage(byte[] imageBytes) {
-//        try (Graph g = new Graph()) {
-//            GraphBuilder b = new GraphBuilder(g);
-//            // - The model was trained with images scaled to 224x224 pixels.
-//            // - The colors, represented as R, G, B in 1-byte each were converted to
-//            // float using (value - Mean)/Scale.
-//            final int H = 299;
-//            final int W = 299;
-//            // final float mean = 117f;
-//            // final float scale = 1f;
-//            final float mean = 0f;
-//            final float scale = 255f;
-//
-//            // Since the graph is being constructed once per execution here, we can use a
-//            // constant for the
-//            // input image. If the graph were to be re-used for multiple input images, a
-//            // placeholder would
-//            // have been more appropriate.
-//            final Output<String> input = b.constant("input", imageBytes);
-//            final Output<Float> output = b.div(
-//            		                           b.sub(
-//            		                        		  b.resizeBilinear(
-//            		                        				  b.expandDims(
-//            		                        						  b.cast(
-//            		                        								  b.decodeJpeg(input, 3), 
-//            		                        								  Float.class), 
-//            		                        						  b.constant("make_batch", 0)
-//            		                        						  ), 
-//            		                        				  b.constant("size", new int[] { H, W }))
-//            		                        		  , b.constant("mean", mean)
-//            		                        		  ),
-//                                               b.constant("scale", scale)
-//                                               );
-//            try (Session s = new Session(g)) {
-//                return s.runner().fetch(output.op().name()).run().get(0).expect(Float.class);
-//            }
-//        }
-//    }
-
     public static float[][] executeDNNGraph(byte[] graphDef, Tensor<Float> image) {
         try (Graph g = new Graph()) {
             g.importGraphDef(graphDef);
@@ -120,11 +70,8 @@ public class TensorflowUtils {
         }
     }
 
-    // In the fullness of time, equivalents of the methods of this class should be
-    // auto-generated from
-    // the OpDefs linked into libtensorflow_jni.so. That would match what is done in
-    // other languages
-    // like Python, C++ and Go.
+    // In the fullness of time, equivalents of the methods of this class should be auto-generated from
+    // the OpDefs linked into libtensorflow_jni.so. That would match what is done in other languages like Python, C++ and Go.
     static class GraphBuilder {
         private Graph g;
 

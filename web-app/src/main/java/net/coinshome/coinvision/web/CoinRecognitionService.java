@@ -30,12 +30,12 @@ public class CoinRecognitionService {
 
     public List<PredictionInfo> recognizeCoin(byte[] image) {
 
-        List<byte[]> imagesList = new ArrayList<byte[]>();
+        List<byte[]> imagesList = new ArrayList<>();
 
         { // add original and grayscaled image scaled down to Inception frame
             try {
                 BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(image));
-                BufferedImage origImageResized = ImageUtils.scaleImage(originalImage, ImageUtils.partWidth, ImageUtils.partHeight);
+                BufferedImage origImageResized = ImageUtils.scaleImage(originalImage, ImageUtils.INCEPTION_WIDTH, ImageUtils.INCEPTION_HEIGHT);
                 imagesList.add(ImageUtils.toByteArrayAutoClosable(origImageResized));
 
 
@@ -100,7 +100,6 @@ public class CoinRecognitionService {
 
             List<PredictionInfo> tempMatchedCoinIds = new ArrayList<>(labelProbabilities.length * tempMatchAmount);
 
-            String[] coinIds = new String[tempMatchAmount]; // is used to resolve images
             for (int j = 0; j < labelProbabilities.length; j++) {
                 for (int i = 0; i < tempMatchAmount; i++) {
                     int bestLabelIdx = maxIndex(labelProbabilities[j]);
@@ -108,8 +107,6 @@ public class CoinRecognitionService {
                     String imageId = label2CoinIdMap.get(coinId);
 
                     logger.debug("BEST MATCH: {} ({} likely) coinshome.net coinGroupId: {}", coinId, labelProbabilities[j][bestLabelIdx] * 100f, coinId);
-
-                    coinIds[i] = coinId;
 
                     PredictionInfo predictionInfo = new PredictionInfo(coinId, imageId, labelProbabilities[j][bestLabelIdx]);
                     logger.debug(predictionInfo.toString());

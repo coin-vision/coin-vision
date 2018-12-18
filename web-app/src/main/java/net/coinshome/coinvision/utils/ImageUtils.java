@@ -10,8 +10,8 @@ import java.io.InputStream;
 
 public class ImageUtils {
 
-    public static final int partWidth = 299; // inception preferred size
-    public static final int partHeight = 299; // inception preferred size
+    public static final int INCEPTION_WIDTH = 299; // inception preferred size
+    public static final int INCEPTION_HEIGHT = 299; // inception preferred size
 
     public static BufferedImage scaleImage(BufferedImage image, int newWidth, int newHeight) {
         if (null == image)
@@ -88,7 +88,7 @@ public class ImageUtils {
         int batchSize = 0;
         for (int w_offset = 0; w_offset < originalImage.getWidth(); w_offset = w_offset + step) {
             for (int h_offset = 0; h_offset < originalImage.getHeight(); h_offset = h_offset + step) {
-                if (w_offset + partWidth > originalImage.getWidth() || h_offset + partHeight > originalImage.getHeight()) {
+                if (w_offset + INCEPTION_WIDTH > originalImage.getWidth() || h_offset + INCEPTION_HEIGHT > originalImage.getHeight()) {
                     continue;
                 }
                 batchSize++;
@@ -100,10 +100,10 @@ public class ImageUtils {
 
         for (int w_offset = 0; w_offset < originalImage.getWidth(); w_offset = w_offset + step) {
             for (int h_offset = 0; h_offset < originalImage.getHeight(); h_offset = h_offset + step) {
-                if (w_offset + partWidth > originalImage.getWidth() || h_offset + partHeight > originalImage.getHeight()) {
+                if (w_offset + INCEPTION_WIDTH > originalImage.getWidth() || h_offset + INCEPTION_HEIGHT > originalImage.getHeight()) {
                     continue;
                 }
-                BufferedImage subImgage = originalImage.getSubimage(w_offset, h_offset, partWidth, partHeight);
+                BufferedImage subImgage = originalImage.getSubimage(w_offset, h_offset, INCEPTION_WIDTH, INCEPTION_HEIGHT);
                 try {
                     result[imageId] = toByteArrayAutoClosable(subImgage);
                 } catch (IOException e) {
