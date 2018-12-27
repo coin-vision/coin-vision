@@ -98,7 +98,7 @@ class Coins extends Component{
                         <div className="card border-top-0 rounded-0">
 
                             {downloadedImage && (
-                                <div className="list-group list-group-flush">
+                                <div className="list-group-flush">
                                     <h4 className="card-title font-weight-light m-0">Original Image</h4>
                                     <img src={downloadedImage} />
                                 </div>
