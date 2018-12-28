@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
-import Coins from './Coins'
+import React from 'react';
+import Coins from './containers/CoinsContainer'
 
-class Welcome extends Component {
-    render() {
-        return (
-            <div className="text-center mt-4">
-               <Coins coinsList={{}}/>
-            </div>
-        );
-    }
-}
+const Welcome  = () => (
+    <div className="text-center mt-4">
+       <Coins />
+    </div>
+)
 
 export default Welcome;

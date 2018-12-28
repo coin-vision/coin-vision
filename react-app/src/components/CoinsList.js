@@ -1,45 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { GoTrashcan, GoListUnordered } from 'react-icons/go';
 import { FaLink } from 'react-icons/fa';
+import PropTypes from 'prop-types'
 import { navigate } from '@reach/router';
 
-class CoinsList extends Component{
-    constructor(props){
-        super(props)
-        this.state ={
-            importUrl: ''
-        }
-
-    }
-
-
-    deleteEntry = (e, imageId) => {
-        e.preventDefault();
-
-    };
-
-
-    render() {
-        const { predictions } = this.props;
-        console.log([...predictions].length)
-        const coins = Array.from(predictions).map(item => {
+const  CoinsList = (props) => {
+        const { predictions } = props;
+        const predictionList = predictions.map(item => {
             return (
                 <div className="list-group-item d-flex" key={item.imageId}>
                     <section
                         className="btn-group align-self-center"
                         role="group"
-                        aria-label="Meeting Options"
+                        aria-label="Prediction Options"
                     >
                         <button
                             className="btn btn-sm btn-outline-secondary"
-                            title="Delete Meeting"
-                            onClick={e => this.deleteEntry(e, item.imageId)}
+                            title="Delete Prediction"
+                            onClick={e => deleteEntry(e, item.imageId)}
                         >
                             <GoTrashcan />
                         </button>
                         <button
                             className="btn btn-sm btn-outline-secondary"
-                            title="Check In"
+                            title="Save"
                             onClick={() =>
                                 navigate(
                                     `/checkin/${this.props.userID}/${item.imageId}`
@@ -62,16 +46,29 @@ class CoinsList extends Component{
                     </section>
 
                     <section className="pl-3 text-left align-self-center">
-                        <a href={`https://www.coinshome.net/coin_details.htm?id=${item.coinId}`} target={"_blank"} > <img alt="${item.coinId}" src={`https://d3k6u6bv48g1ck.cloudfront.net/fs/400_200/${item.imageId}.jpg`} /> </a>
+                        <a href={`https://www.coinshome.net/coin_details.htm?id=${item.coinId}`} target={"_blank"} >
+                          <img alt={`${item.coinId}`} src={`https://d3k6u6bv48g1ck.cloudfront.net/fs/400_200/${item.imageId}.jpg`} />
+                        </a>
                     </section>
                 </div>
             );
         });
 
-        return <div>{coins}</div>;
+        return <div>{predictionList}</div>;
     }
 
 
+    const deleteEntry = (e, imageId) => {
+      e.preventDefault();
+      console.log("Remove" + imageId);
+    };
+
+CoinsList.propTypes = {
+  predictions: PropTypes.arrayOf(PropTypes.shape({
+    coinId: PropTypes.string.isRequired,
+    imageId: PropTypes.string.isRequired,
+    probability: PropTypes.number.isRequired
+  }).isRequired).isRequired
 }
 
 export default CoinsList;
