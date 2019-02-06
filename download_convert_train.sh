@@ -17,6 +17,12 @@ TRAIN_DIR=${DATASET_DIR}/train_logs
 dataset-extractor/gradlew -b dataset-extractor/build.gradle clean shadowJar && java -jar dataset-extractor/build/libs/dataset-extractor-all.jar ${DATASET_URL} ${DATASET_DIR}
 
 
+echo "Removing augmented files..."
+find . -name '*_gen_*' -exec rm -rf {} \;
+
+echo "Running augmentation..."
+python dnn-trainer-tf/augmenter/augmenter.py  --dataset_train_dir="${DATASET_DIR}/labeled-images-tr" --dataset_test_dir="${DATASET_DIR}/labeled-images-tst"
+
 # CONVERTING IMAGES TO *.tfrecord format
 
 # before the next steps you can set training set amount and number of shards -> check/fix convert_coins.py
