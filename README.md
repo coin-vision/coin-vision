@@ -11,7 +11,7 @@ It can be update to work with other collectibles (e.g. post marks, hotel cards, 
 
 * [mobile-app](https://github.com/coin-vision/coin-vision/tree/master/mobile-app "mobile-app") - Mobile application to search coins by picture (tech: JavaScript, ReactNative)
 
-* [dataset-extractor](https://github.com/coin-vision/coin-vision/tree/master/dataset-extractor "dataset-extractor") - Console application to pull datasets from www.coinshome.net (tech: Java) 
+* [dataset-extractor](https://github.com/coin-vision/dataset-extractor "dataset-extractor") - Console application to pull datasets from www.coinshome.net (tech: Java) 
 
 * [dnn-trainer-tf](https://github.com/coin-vision/coin-vision/tree/master/dnn-trainer-tf "dnn-trainer-tf") - Scripts for DNN training (tech: Python, Tensorflow)
 
